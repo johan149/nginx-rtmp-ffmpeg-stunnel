@@ -29,13 +29,13 @@ RUN apk add --update \
   zlib-dev
 
 # Get nginx source.
-RUN cd /tmp && \
+RUN cd /tmp/ && \
   wget https://nginx.org/download/nginx-${NGINX_VERSION}.tar.gz && \
   tar zxf nginx-${NGINX_VERSION}.tar.gz && \
   rm nginx-${NGINX_VERSION}.tar.gz
 
 # Get nginx-rtmp module.
-RUN cd /tmp && \
+RUN cd /tmp/ && \
   wget https://github.com/arut/nginx-rtmp-module/archive/v${NGINX_RTMP_VERSION}.tar.gz && \
   tar zxf v${NGINX_RTMP_VERSION}.tar.gz && rm v${NGINX_RTMP_VERSION}.tar.gz
 
@@ -131,7 +131,7 @@ RUN apk add --no-cache gcc musl-dev openssl-dev make
 # Get stunnel source
 RUN cd /tmp/ && \
   wget https://www.stunnel.org/downloads/stunnel-${STUNNEL_VERSION}.tar.gz && \
-  tar zxf stunnel-${STUNNEL_VERSION}.tar.gz && rm ffmpeg-${FFMPEG_VERSION}.tar.gz
+  tar zxf stunnel-${STUNNEL_VERSION}.tar.gz && rm stunnel-${STUNNEL_VERSION}.tar.gz
   
 # Compile stunnel.
 RUN cd /tmp/stunnel-${STUNNEL_VERSION} && \
@@ -139,7 +139,7 @@ RUN cd /tmp/stunnel-${STUNNEL_VERSION} && \
   --prefix=/usr \
   --sysconfdir=/etc \
   --localstatedir=/var && \
-  make && make install DESTDIR=/stunnel-bin
+  cd /tmp/stunnel-${STUNNEL_VERSION} && make && make install DESTDIR=/stunnel-bin
 
 # Cleanup.
 RUN rm -rf /var/cache/* /tmp/*
