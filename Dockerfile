@@ -172,18 +172,18 @@ RUN apk add --update \
   x264-dev \
   x265-dev
 
-COPY --from=build-nginx /usr/local/nginx /mnt/user/appdata/nginx-rtmp-stunnel/nginx
-COPY --from=build-nginx /etc/nginx /mnt/user/appdata/nginx-rtmp-stunnel/nginx/conf
-#COPY --from=build-nginx /opt/data /mnt/user/appdata/nginx-rtmp-stunnel/nginx/data
-#COPY --from=build-nginx /www /mnt/user/appdata/nginx-rtmp-stunnel/nginx/www
-#COPY --from=build-nginx /opt/certs /mnt/user/appdata/nginx-rtmp-stunnel/nginx/certs
+COPY --from=build-nginx /usr/local/nginx /usr/local/nginx
+COPY --from=build-nginx /etc/nginx /etc/nginx
+#COPY --from=build-nginx /opt/data /opt/data
+#COPY --from=build-nginx /www /www
+#COPY --from=build-nginx /opt/certs /opt/certs
 
-COPY --from=build-ffmpeg /usr/local /mnt/user/appdata/nginx-rtmp-stunnel/ffmpeg
+COPY --from=build-ffmpeg /usr/local /usr/local
 COPY --from=build-ffmpeg /usr/lib/libfdk-aac.so.2 /usr/lib/libfdk-aac.so.2
 
-COPY --from=build-stunnel /stunnel-bin/etc/stunnel /mnt/user/appdata/nginx-rtmp-stunnel/stunnel/config
-#COPY --from=build-stunnel /stunnel-bin/usr/bin/stunnel /mnt/user/appdata/nginx-rtmp-stunnel/stunnel/bin
-#COPY --from=build-stunnel /stunnel-bin/usr/lib/stunnel /mnt/user/appdata/nginx-rtmp-stunnel/stunnel/lib
+COPY --from=build-stunnel /stunnel-bin/etc/stunnel /stunnel-bin/etc/stunnel
+COPY --from=build-stunnel /stunnel-bin/usr/bin/stunnel /stunnel-bin/usr/bin/stunneln
+COPY --from=build-stunnel /stunnel-bin/usr/lib/stunnel /stunnel-bin/usr/lib/stunnel
 
 # Add NGINX path, config and static files.
 ENV PATH "${PATH}:/usr/local/nginx/sbin"
