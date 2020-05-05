@@ -126,7 +126,7 @@ RUN rm -rf /var/cache/* /tmp/*
 FROM alpine:3.11 as build-stunnel
 ARG STUNNEL_VERSION
 
-apk add --no-cache gcc musl-dev openssl-dev make
+RUN apk add --no-cache gcc musl-dev openssl-dev make
 
 # Get stunnel source
 RUN cd /tmp && \
